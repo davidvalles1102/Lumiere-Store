@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lumière — Premium Fashion Store</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ANNOUNCEMENT BAR -->
+  <div class="announcement-bar">
+    <p>Free shipping on orders over $75 &nbsp;·&nbsp; Use code <strong>LUMIERE20</strong> for 20% off your first order</p>
+    <button class="announcement-close" onclick="this.parentElement.remove()">✕</button>
+  </div>
+
+  <!-- HEADER -->
+  <header class="header" id="header">
+    <div class="header-inner container">
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+
+      <a href="#" class="logo">Lumière</a>
+
+      <nav class="nav" id="nav">
+        <a href="#collections">Collections</a>
+        <a href="#products">Shop</a>
+        <a href="#about">About</a>
+        <a href="#blog">Journal</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <div class="header-actions">
+        <button class="icon-btn" id="search-btn" aria-label="Search">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        </button>
+        <!-- AUTH BUTTON — swaps between login & account dropdown -->
+        <div class="auth-wrap" id="auth-wrap">
+          <button class="icon-btn" id="auth-btn" aria-label="Account" onclick="openAuthModal('login')">
+            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          </button>
+          <div class="account-dropdown" id="account-dropdown">
+            <div class="account-dropdown-header">
+              <strong id="account-name">My Account</strong>
+              <span id="account-email"></span>
+            </div>
+            <a href="#" onclick="showOrders()">My Orders</a>
+            <a href="#" onclick="handleSignOut()">Sign Out</a>
+          </div>
+        </div>
+        <button class="icon-btn cart-btn" id="cart-btn" aria-label="Cart">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+          <span class="cart-count" id="cart-count">0</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- SEARCH BAR -->
+    <div class="search-bar" id="search-bar">
+      <div class="container">
+        <input type="text" placeholder="Search for products, collections..." id="search-input" />
+        <button onclick="closeSearch()">✕</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- MOBILE NAV -->
+  <div class="mobile-nav" id="mobile-nav">
+    <a href="#collections">Collections</a>
+    <a href="#products">Shop</a>
+    <a href="#about">About</a>
+    <a href="#blog">Journal</a>
+    <a href="#contact">Contact</a>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-slides">
+      <div class="hero-slide active" style="background-image: url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=1600&q=80')">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+          <span class="hero-tag">New Season 2026</span>
+          <h1>Dress the Life<br/>You Want to Live</h1>
+          <p>Curated pieces for the effortlessly stylish. Discover our newest collection.</p>
+          <div class="hero-actions">
+            <a href="#products" class="btn btn-primary">Shop Now</a>
+            <a href="#collections" class="btn btn-outline-light">View Collections</a>
+          </div>
+        </div>
+      </div>
+      <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=1600&q=80')">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+          <span class="hero-tag">Limited Edition</span>
+          <h1>Summer<br/>Essentials</h1>
+          <p>Lightweight fabrics and vibrant colours for the warmest days.</p>
+          <div class="hero-actions">
+            <a href="#products" class="btn btn-primary">Explore Now</a>
+            <a href="#collections" class="btn btn-outline-light">See All</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-dots" id="hero-dots">
+      <button class="dot active" onclick="goToSlide(0)"></button>
+      <button class="dot" onclick="goToSlide(1)"></button>
+    </div>
+    <button class="hero-arrow left" onclick="prevSlide()">&#8592;</button>
+    <button class="hero-arrow right" onclick="nextSlide()">&#8594;</button>
+  </section>
+
+  <!-- TRUST STRIP -->
+  <section class="trust-strip">
+    <div class="container trust-grid">
+      <div class="trust-item">
+        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+        <div><strong>Free Shipping</strong><span>On orders over $75</span></div>
+      </div>
+      <div class="trust-item">
+        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+        <div><strong>30-Day Returns</strong><span>Hassle-free returns</span></div>
+      </div>
+      <div class="trust-item">
+        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <div><strong>Secure Checkout</strong><span>SSL encrypted payments</span></div>
+      </div>
+      <div class="trust-item">
+        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.72 12a19.79 19.79 0 0 1-3-8.59A2 2 0 0 1 3.72 1.5h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.16 6.16l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        <div><strong>24/7 Support</strong><span>We're here to help</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COLLECTIONS -->
+  <section class="section" id="collections">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Browse by Category</span>
+        <h2>Our Collections</h2>
+      </div>
+      <div class="collections-grid">
+        <a href="#products" class="collection-card large" onclick="filterProducts('Women')">
+          <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?w=800&q=80" alt="Women" loading="lazy" />
+          <div class="collection-info">
+            <h3>Women</h3>
+            <span>142 Products</span>
+          </div>
+        </a>
+        <a href="#products" class="collection-card" onclick="filterProducts('Men')">
+          <img src="https://images.unsplash.com/photo-1520975954732-35dd22299614?w=800&q=80" alt="Men" loading="lazy" />
+          <div class="collection-info">
+            <h3>Men</h3>
+            <span>98 Products</span>
+          </div>
+        </a>
+        <a href="#products" class="collection-card" onclick="filterProducts('Accessories')">
+          <img src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=800&q=80" alt="Accessories" loading="lazy" />
+          <div class="collection-info">
+            <h3>Accessories</h3>
+            <span>64 Products</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRODUCTS -->
+  <section class="section section-gray" id="products">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Handpicked for You</span>
+        <h2>Featured Products</h2>
+      </div>
+
+      <!-- Filter Tabs -->
+      <div class="filter-tabs" id="filter-tabs">
+        <button class="filter-tab active" onclick="filterProducts('All', this)">All</button>
+        <button class="filter-tab" onclick="filterProducts('Women', this)">Women</button>
+        <button class="filter-tab" onclick="filterProducts('Men', this)">Men</button>
+        <button class="filter-tab" onclick="filterProducts('Accessories', this)">Accessories</button>
+        <button class="filter-tab" onclick="filterProducts('Sale', this)">Sale</button>
+      </div>
+
+      <!-- Products Grid -->
+      <div class="products-grid" id="products-grid"></div>
+
+      <div class="text-center mt-lg">
+        <a href="#" class="btn btn-outline">Load More Products</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- BANNER -->
+  <section class="promo-banner">
+    <div class="container promo-inner">
+      <div class="promo-text">
+        <span class="section-tag light">Limited Time Offer</span>
+        <h2>Up to 40% Off<br/>Summer Sale</h2>
+        <p>Stock is limited. Shop our sale before it's gone.</p>
+        <a href="#products" class="btn btn-primary" onclick="filterProducts('Sale', document.querySelector('[onclick*=Sale]'))">Shop the Sale</a>
+      </div>
+      <div class="promo-image">
+        <img src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=700&q=80" alt="Summer Sale" loading="lazy" />
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="section" id="about">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">What Our Customers Say</span>
+        <h2>Real Reviews</h2>
+      </div>
+      <div class="testimonials-grid">
+        <div class="testimonial-card">
+          <div class="stars">★★★★★</div>
+          <p>"The quality is absolutely stunning. I ordered three items and all of them exceeded my expectations. Will definitely be a returning customer."</p>
+          <div class="testimonial-author">
+            <img src="https://i.pravatar.cc/48?img=1" alt="Sarah M." />
+            <div><strong>Sarah M.</strong><span>Verified Buyer</span></div>
+          </div>
+        </div>
+        <div class="testimonial-card featured">
+          <div class="stars">★★★★★</div>
+          <p>"Lumière has completely transformed my wardrobe. The pieces are timeless, beautifully made, and arrive so quickly. Customer service is top notch too!"</p>
+          <div class="testimonial-author">
+            <img src="https://i.pravatar.cc/48?img=5" alt="James K." />
+            <div><strong>James K.</strong><span>Verified Buyer</span></div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="stars">★★★★★</div>
+          <p>"Fast shipping, beautiful packaging, and the clothes are even better in person. I've recommended Lumière to all my friends."</p>
+          <div class="testimonial-author">
+            <img src="https://i.pravatar.cc/48?img=9" alt="Priya R." />
+            <div><strong>Priya R.</strong><span>Verified Buyer</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INSTAGRAM / LOOKBOOK -->
+  <section class="section section-gray" id="blog">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">@lumierestyle</span>
+        <h2>Follow Our Journey</h2>
+        <p class="section-desc">Tag us in your photos for a chance to be featured</p>
+      </div>
+      <div class="instagram-grid">
+        <div class="instagram-item"><img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=400&q=80" alt="Look 1" loading="lazy" /><div class="ig-overlay"><svg width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></div></div>
+        <div class="instagram-item"><img src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=400&q=80" alt="Look 2" loading="lazy" /><div class="ig-overlay"><svg width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></div></div>
+        <div class="instagram-item"><img src="https://images.unsplash.com/photo-1550614000-4895a10e1bfd?w=400&q=80" alt="Look 3" loading="lazy" /><div class="ig-overlay"><svg width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></div></div>
+        <div class="instagram-item"><img src="https://images.unsplash.com/photo-1581338834647-b0fb40704e21?w=400&q=80" alt="Look 4" loading="lazy" /><div class="ig-overlay"><svg width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></div></div>
+        <div class="instagram-item"><img src="https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=400&q=80" alt="Look 5" loading="lazy" /><div class="ig-overlay"><svg width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></div></div>
+        <div class="instagram-item"><img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?w=400&q=80" alt="Look 6" loading="lazy" /><div class="ig-overlay"><svg width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEWSLETTER -->
+  <section class="newsletter" id="contact">
+    <div class="container newsletter-inner">
+      <div class="newsletter-text">
+        <h2>Join the Lumière Community</h2>
+        <p>Get early access to new collections, exclusive offers, and style inspiration delivered to your inbox.</p>
+      </div>
+      <form class="newsletter-form" onsubmit="handleNewsletter(event)">
+        <input type="email" placeholder="Enter your email address" required />
+        <button type="submit" class="btn btn-primary">Subscribe</button>
+      </form>
+      <p class="newsletter-note">No spam, ever. Unsubscribe anytime.</p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <a href="#" class="logo">Lumière</a>
+        <p>Premium fashion for the effortlessly stylish. Crafted with care, delivered with love.</p>
+        <div class="social-links">
+          <a href="#" aria-label="Instagram">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          </a>
+          <a href="#" aria-label="Twitter">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          </a>
+          <a href="#" aria-label="Pinterest">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.162-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738a.36.36 0 0 1 .083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.632-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24.009 12.017 24.009c6.621 0 11.99-5.367 11.99-11.988C24.007 5.367 18.638.001.012.001z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Shop</h4>
+        <a href="#">New Arrivals</a>
+        <a href="#">Women's Collection</a>
+        <a href="#">Men's Collection</a>
+        <a href="#">Accessories</a>
+        <a href="#">Sale</a>
+      </div>
+      <div class="footer-col">
+        <h4>Help</h4>
+        <a href="#">FAQ</a>
+        <a href="#">Shipping & Returns</a>
+        <a href="#">Size Guide</a>
+        <a href="#">Track Your Order</a>
+        <a href="#">Contact Us</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="#">About Us</a>
+        <a href="#">Sustainability</a>
+        <a href="#">Press</a>
+        <a href="#">Careers</a>
+        <a href="#">Affiliates</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container footer-bottom-inner">
+        <p>&copy; 2026 Lumière. All rights reserved.</p>
+        <div class="footer-legal">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+          <a href="#">Cookie Settings</a>
+        </div>
+        <div class="payment-icons">
+          <span>Visa</span><span>MC</span><span>AmEx</span><span>PayPal</span><span>Apple Pay</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- CART DRAWER -->
+  <div class="cart-overlay" id="cart-overlay" onclick="closeCart()"></div>
+  <aside class="cart-drawer" id="cart-drawer">
+    <div class="cart-header">
+      <h3>Your Cart (<span id="cart-total-items">0</span>)</h3>
+      <button onclick="closeCart()" class="cart-close">✕</button>
+    </div>
+    <div class="cart-items" id="cart-items">
+      <div class="cart-empty">
+        <svg width="64" height="64" fill="none" stroke="#ccc" stroke-width="1.5" viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        <p>Your cart is empty</p>
+        <button onclick="closeCart()" class="btn btn-outline">Continue Shopping</button>
+      </div>
+    </div>
+    <div class="cart-footer" id="cart-footer" style="display:none;">
+      <div class="cart-subtotal">
+        <span>Subtotal</span>
+        <strong id="cart-subtotal">$0.00</strong>
+      </div>
+      <p class="cart-shipping-note">Shipping & taxes calculated at checkout</p>
+      <button class="btn btn-primary btn-full" id="checkout-btn" onclick="handleCheckout()">Checkout</button>
+      <button class="btn btn-outline btn-full" onclick="closeCart()">Continue Shopping</button>
+    </div>
+  </aside>
+
+  <!-- TOAST -->
+  <div class="toast" id="toast"></div>
+
+  <!-- QUICK VIEW MODAL -->
+  <div class="modal-overlay" id="modal-overlay" onclick="closeModal()"></div>
+  <div class="modal" id="product-modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="modal-content" id="modal-content"></div>
+  </div>
+
+  <!-- AUTH MODAL -->
+  <div class="modal-overlay" id="auth-overlay" onclick="closeAuthModal()"></div>
+  <div class="modal auth-modal" id="auth-modal">
+    <button class="modal-close" onclick="closeAuthModal()">✕</button>
+
+    <!-- LOGIN TAB -->
+    <div class="auth-panel" id="auth-login">
+      <div class="auth-header">
+        <h2>Welcome Back</h2>
+        <p>Sign in to your Lumière account</p>
+      </div>
+      <form id="login-form" onsubmit="handleLogin(event)">
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" id="login-email" placeholder="you@example.com" required />
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" id="login-password" placeholder="••••••••" required />
+        </div>
+        <div class="auth-error" id="login-error"></div>
+        <button type="submit" class="btn btn-primary btn-full" id="login-submit">Sign In</button>
+      </form>
+      <p class="auth-switch">Don't have an account? <button onclick="openAuthModal('signup')">Create one</button></p>
+    </div>
+
+    <!-- SIGN UP TAB -->
+    <div class="auth-panel hidden" id="auth-signup">
+      <div class="auth-header">
+        <h2>Create Account</h2>
+        <p>Join the Lumière community</p>
+      </div>
+      <form id="signup-form" onsubmit="handleSignup(event)">
+        <div class="form-group">
+          <label>Full Name</label>
+          <input type="text" id="signup-name" placeholder="Jane Doe" required />
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" id="signup-email" placeholder="you@example.com" required />
+        </div>
+        <div class="form-group">
+          <label>Password <span style="font-weight:400;color:#6b7280">(min. 6 characters)</span></label>
+          <input type="password" id="signup-password" placeholder="••••••••" minlength="6" required />
+        </div>
+        <div class="auth-error" id="signup-error"></div>
+        <button type="submit" class="btn btn-primary btn-full" id="signup-submit">Create Account</button>
+      </form>
+      <p class="auth-switch">Already have an account? <button onclick="openAuthModal('login')">Sign in</button></p>
+    </div>
+  </div>
+
+  <!-- ORDERS MODAL -->
+  <div class="modal-overlay" id="orders-overlay" onclick="closeOrdersModal()"></div>
+  <div class="modal orders-modal" id="orders-modal">
+    <button class="modal-close" onclick="closeOrdersModal()">✕</button>
+    <div style="padding:40px">
+      <h2 style="margin-bottom:24px">My Orders</h2>
+      <div id="orders-list"></div>
+    </div>
+  </div>
+
+  <!-- Supabase SDK — exposes window.supabase (only needed when keys are configured) -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="app.js"></script>
+</body>
+</html>
